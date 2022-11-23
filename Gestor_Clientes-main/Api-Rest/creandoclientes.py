@@ -5,6 +5,8 @@ from pydantic import BaseModel, constr, validator
 import helpers
 import database as db
 
+app = FastAPI()
+
 class ModeloCliente(BaseModel):
     dni: constr(min_length=3, max_length=3)
     nombre: constr(min_length=2, max_length=30)
@@ -27,11 +29,7 @@ async def clientes_crear(datos: ModeloCrearCliente):
         return JSONResponse(content=contextlib.to_dict(), headers=headers)
     raise HTTPException(status_code=404)
 
-{
-"dni": "",
-"nombre": "",
-"apellido": ""
-}
+{"dni":"36N","nombre":"Fernando","apellido":"López"}
 
 {
 "detail": [
@@ -83,6 +81,3 @@ async def clientes_crear(datos: ModeloCrearCliente):
     }
 ]
 }
-
-
-{"dni":"36N","nombre":"Fernando","apellido":"López"}

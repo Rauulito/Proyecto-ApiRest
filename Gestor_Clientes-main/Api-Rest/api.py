@@ -40,18 +40,10 @@ def html():
     return Response(content=content, media_type="text/html")
 
 
-
-@app.get("/clientes/", tags=["Clientes"])
-async def clientes():
-    content = [cliente.to_dict() for cliente in db.Clientes.lista]
-    return JSONResponse(content=content, headers=headers)
-
-@app.get("/clientes/buscar/{dni}/", tags=["Clientes"])
-async def clientes_buscar(dni: str):
-    cliente = db.Clientes.buscar(dni=dni)
-    if not cliente:
-        raise HTTPException(status_code=404, detail="Cliente no encontrado")
-    return JSONResponse(content=cliente.to_dict(), headers=headers)
+app = FastAPI(
+    title="API del Gestor de clientes",
+    description="Ofrece diferentes funciones para gestionar los clientes.")
 
 
 print("Servidor de la API...")
+

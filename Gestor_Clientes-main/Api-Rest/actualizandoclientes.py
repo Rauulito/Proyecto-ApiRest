@@ -6,6 +6,7 @@ from pydantic import BaseModel, constr, validator
 import database as db
 
 headers = {"content-type": "charset=utf-8"}
+app = FastAPI()
 
 class ModeloCliente(BaseModel):
     dni: constr(min_length=3, max_length=3)
@@ -13,7 +14,7 @@ class ModeloCliente(BaseModel):
     apellido: constr(min_length=2, max_length=30)
 
 
-@ app.put("/clientes/actualizar/", tags=["Clientes"])
+@app.put("/clientes/actualizar/", tags=["Clientes"])
 async def clientes_actualizar(datos: ModeloCliente):
     if db.Clientes.buscar(datos.dni):
         cliente = db.Clientes.modificar(datos.dni, datos.nombre, datos.apellido)

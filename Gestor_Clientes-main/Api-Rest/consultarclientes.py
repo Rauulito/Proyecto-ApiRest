@@ -2,6 +2,9 @@ import database as db
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, Response, HTTPException
 
+app = FastAPI()
+
+
 #listamos todos los clientes
 @app.get("/clientes/")
 async def clientes():
